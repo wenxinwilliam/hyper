@@ -6,6 +6,7 @@ import StyleSheet_ from './style-sheet';
 import {TermsProps, HyperDispatch} from '../hyper';
 import Term from './term';
 import {ObjectTypedKeys} from '../utils/object';
+import Duo from '../../duo/Duo';
 
 const TermGroup = decorate(TermGroup_, 'TermGroup');
 const StyleSheet = decorate(StyleSheet_, 'StyleSheet');
@@ -75,6 +76,7 @@ export default class Terms extends React.Component<TermsProps> {
     return (
       <div className={`terms_terms ${shift ? 'terms_termsShifted' : 'terms_termsNotShifted'}`}>
         {this.props.customChildrenBefore}
+        <Duo />
         {this.props.termGroups.map((termGroup) => {
           const {uid} = termGroup;
           const isActive = uid === this.props.activeRootGroup;

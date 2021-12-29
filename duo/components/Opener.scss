@@ -1,0 +1,9 @@
+.menu {
+  position: absolute;
+  left: 80px;
+  transition: 0.25s;
+
+  &:hover {
+    color: white;
+  }
+}

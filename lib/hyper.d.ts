@@ -29,6 +29,7 @@ export type ITermState = Immutable<{
 export type cursorShapes = 'BEAM' | 'UNDERLINE' | 'BLOCK';
 import {FontWeight, Terminal} from 'xterm';
 import {ColorMap} from './config';
+import {DuoState} from '../duo/duoSlice';
 
 export type uiState = Immutable<{
   _lastUpdate: number | null;
@@ -147,6 +148,7 @@ export type HyperState = {
   ui: uiState;
   sessions: sessionState;
   termGroups: ITermState;
+  duo: DuoState;
 };
 
 import {UIActions} from './constants/ui';

@@ -1,0 +1,22 @@
+import {createSlice} from '@reduxjs/toolkit';
+import {HyperState} from '../lib/hyper';
+
+export const duoSlice = createSlice({
+  name: 'duo',
+  initialState: {
+    isOpen: false
+  },
+  reducers: {
+    togglePanel: (state) => {
+      state.isOpen = !state.isOpen;
+    }
+  }
+});
+
+export const {togglePanel} = duoSlice.actions;
+
+export type DuoState = ReturnType<typeof duoSlice.getInitialState>;
+
+export const selectDuo = (state: HyperState) => state.duo;
+
+export default duoSlice.reducer;

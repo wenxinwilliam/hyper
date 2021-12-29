@@ -3,6 +3,7 @@
   "include": [
     "./app/",
     "./lib/",
+    "./duo/",
     "./test/",
     "./cli/",
     "./",
