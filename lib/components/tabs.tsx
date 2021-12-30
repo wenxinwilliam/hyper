@@ -4,6 +4,7 @@ import {decorate, getTabProps} from '../utils/plugins';
 
 import Tab_ from './tab';
 import {TabsProps} from '../hyper';
+import Opener from './opener';
 
 const Tab = decorate(Tab_, 'Tab');
 const isMac = /Mac/.test(navigator.userAgent);
@@ -17,6 +18,7 @@ export default class Tabs extends React.PureComponent<TabsProps> {
     return (
       <nav className={`tabs_nav ${hide ? 'tabs_hiddenNav' : ''}`}>
         {this.props.customChildrenBefore}
+        <Opener />
         {tabs.length === 1 && isMac ? <div className="tabs_title">{tabs[0].title}</div> : null}
         {tabs.length > 1
           ? [

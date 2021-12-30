@@ -38,6 +38,11 @@ const config: webpack.Configuration[] = [
             to: '[name][ext]'
           },
           {
+            from: './duo/*.html',
+            globOptions: {ignore: ['**/node_modules/**']},
+            to: '[name][ext]'
+          },
+          {
             from: './app/*.json',
             globOptions: {ignore: ['**/node_modules/**']},
             to: '[name][ext]'
@@ -65,7 +70,7 @@ const config: webpack.Configuration[] = [
     mode: 'none',
     name: 'hyper',
     resolve: {
-      extensions: ['.js', '.jsx', '.ts', '.tsx']
+      extensions: ['.js', '.jsx', '.ts', '.tsx', '.css', '.scss']
     },
     devtool: isProd ? 'hidden-source-map' : 'cheap-module-source-map',
     entry: './lib/index.tsx',
@@ -88,6 +93,26 @@ const config: webpack.Configuration[] = [
         {
           test: /\.css$/,
           use: ['style-loader', 'css-loader']
+        },
+        {
+          test: /\.s[ac]ss$/i,
+          use: [
+            // Creates `style` nodes from JS strings
+            'style-loader',
+            // Translates CSS into CommonJS
+            {
+              loader: 'css-loader',
+              options: {
+                importLoaders: 1,
+                sourceMap: true,
+                modules: {
+                  localIdentName: '[local][hash:base64:5]__[path][name]',
+                  exportLocalsConvention: 'camelCase'
+                }
+              }
+            },
+            'sass-loader'
+          ]
         }
       ]
     },

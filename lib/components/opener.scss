@@ -1,0 +1,10 @@
+.menu {
+  position: absolute;
+  left: 80px;
+  transition: 0.25s;
+  top: 5px;
+
+  &:hover {
+    color: white;
+  }
+}

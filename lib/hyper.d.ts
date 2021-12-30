@@ -167,6 +167,7 @@ export type HyperActions = (
   | TermGroupActions
   | InitActions
   | TabActions
+  | DuoActions
 ) & {effect?: () => void};
 
 import configureStore from './store/configure-store';
@@ -308,6 +309,7 @@ export type SearchBoxProps = {
 
 import {FitAddon} from 'xterm-addon-fit';
 import {SearchAddon} from 'xterm-addon-search';
+import {DuoActions} from './constants/duo';
 export type TermProps = {
   backgroundColor: string;
   bell: string;

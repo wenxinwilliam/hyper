@@ -15,6 +15,7 @@ import {execCommand} from '../commands';
 import {setRendererType, unsetRendererType} from '../utils/renderer-utils';
 import {decorateSessionOptions, decorateSessionClass} from '../plugins';
 import {enable as remoteEnable} from '@electron/remote/main';
+import {newDuoWindow} from './duo';
 
 export function newWindow(
   options_: BrowserWindowConstructorOptions,
@@ -238,6 +239,15 @@ export function newWindow(
   rpc.on('command', (command) => {
     const focusedWindow = BrowserWindow.getFocusedWindow();
     execCommand(command, focusedWindow!);
+  });
+  rpc.on('open duo', () => {
+    const duoWindow = app.getDuoWindow();
+    if (duoWindow === null) {
+      const createdDuoWindow = newDuoWindow();
+      app.getDuoWindow = () => createdDuoWindow;
+    } else {
+      duoWindow.focus();
+    }
   });
   // pass on the full screen events from the window to react
   rpc.win.on('enter-full-screen', () => {

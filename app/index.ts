@@ -11,6 +11,7 @@ if (['--help', '-v', '--version'].includes(process.argv[1])) {
 
 // Enable remote module
 import {initialize as remoteInitialize} from '@electron/remote/main';
+
 remoteInitialize();
 
 // Native
@@ -29,6 +30,7 @@ import * as plugins from './plugins';
 import {installCLI} from './utils/cli-install';
 import * as AppMenu from './menus/menu';
 import {newWindow} from './ui/window';
+
 import * as windowUtils from './utils/window-utils';
 
 const windowSet = new Set<BrowserWindow>([]);
@@ -37,6 +39,7 @@ const windowSet = new Set<BrowserWindow>([]);
 app.config = config;
 app.plugins = plugins;
 app.getWindows = () => new Set([...windowSet]); // return a clone
+app.getDuoWindow = () => null;
 
 // function to retrieve the last focused window in windowSet;
 // added to app object in order to expose it to plugins.

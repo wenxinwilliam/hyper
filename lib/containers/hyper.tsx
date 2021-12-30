@@ -3,6 +3,7 @@ import Mousetrap, {MousetrapInstance} from 'mousetrap';
 
 import {connect} from '../utils/plugins';
 import * as uiActions from '../actions/ui';
+import * as duoActions from '../actions/duo';
 import {getRegisteredKeys, getCommandHandler, shouldPreventDefault} from '../command-registry';
 import stylis from 'stylis';
 
@@ -17,6 +18,7 @@ const isMac = /Mac/.test(navigator.userAgent);
 class Hyper extends React.PureComponent<HyperProps> {
   mousetrap!: MousetrapInstance;
   terms!: Terms;
+
   constructor(props: HyperProps) {
     super(props);
   }
@@ -76,6 +78,15 @@ class Hyper extends React.PureComponent<HyperProps> {
         'keydown'
       );
     });
+
+    this.mousetrap.bind(
+      'command+p',
+      (e) => {
+        this.props.openDuo();
+        e.preventDefault();
+      },
+      'keydown'
+    );
   }
 
   componentDidMount() {
@@ -163,6 +174,9 @@ const mapDispatchToProps = (dispatch: HyperDispatch) => {
   return {
     execCommand: (command: string, fn: (e: any, dispatch: HyperDispatch) => void, e: any) => {
       dispatch(uiActions.execCommand(command, fn, e));
+    },
+    openDuo: () => {
+      dispatch(duoActions.openDuo());
     }
   };
 };
